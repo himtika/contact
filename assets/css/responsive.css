@@ -268,10 +268,10 @@
 		display: none;
 	} */
 
-    .back-to-top {
-        bottom: 40px; /* Lebih mepet ke bawah */
-        right: 30px;  /* Lebih mepet ke kanan */
-    }
+.back-to-top {
+    bottom: 80px;   /* 20px (bawah Btn) + 45px (tinggi Btn) + 15px (jarak) */
+    right: 22.5px;  /* tombol 40px, tengahnya sejajar dengan Btn HIMTIKA */
+}
 
     .button {
         width: 40px;  /* Kecilin dari 50px ke 40px */
@@ -317,12 +317,7 @@
 	}
 }
 
-@media only screen and (max-width: 480px) {
-    .back-to-top {
-        bottom: 30px; 
-        right: 20px;
-    }
-}
+
 
 @media (max-width: 768px){
     /* Button BackToHIMTIKA */
@@ -330,9 +325,5 @@
         bottom: 20px;
         right: 20px;
     }
-    /* Button BackToHIMTIKA */
-}  
-@media (max-width: 480px) {
-    .Btn-parent { right: 20px; bottom: 20px; }
-    .back-to-top { right: 17.5px; bottom: 80px; }
 }
+

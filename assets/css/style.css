@@ -2850,10 +2850,6 @@ form{
         top: 0px;
     }
 }
-
-
-
-
 /* Button BackToHIMTIKA */
 .Btn-parent {
   position: fixed;
@@ -2932,10 +2928,17 @@ form{
   opacity: 1;
   width: 65%;
   transition-duration: 0.3s;
-  /* padding-right: 5px; */
 }
 /* button click effect*/
 .Btn:active {
   transform: translate(2px, 2px);
+}
+
+/* Sembunyikan tombol melayang selama preloader (tanpa delay saat muncul) */
+body:not(.page-loaded) .Btn-parent,
+body:not(.page-loaded) .back-to-top {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none;
 }
 /* Button BackToHIMTIKA */
