@@ -323,3 +323,16 @@
         right: 20px;
     }
 }
+
+@media (max-width: 768px){
+    /* Button BackToHIMTIKA */
+    .Btn-parent {
+        bottom: 20px;
+        right: 20px;
+    }
+    /* Button BackToHIMTIKA */
+}  
+@media (max-width: 480px) {
+    .Btn-parent { right: 20px; bottom: 20px; }
+    .back-to-top { right: 17.5px; bottom: 80px; }
+}

@@ -22,6 +22,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 
     
     <!-- Responsive -->
@@ -223,34 +224,39 @@
         </h2>
 
         <!-- FORM TETAP SAMA VISUALNYA, CUMA DITAMBAH ID + NAME -->
-        <form id="contactForm" method="">
+        <form id="contactForm">
 
-          <div class="input-box">
-            <img src="assets/nama.svg" alt="">
-            <input type="text" name="username" placeholder="Name">
-          </div>
+  <div class="input-box">
+    <img src="assets/nama.svg" alt="">
+    <input type="text" name="username" placeholder="Name"
+           required minlength="3" maxlength="50">
+  </div>
 
-          <div class="input-box">
-            <img src="assets/email.svg" alt="">
-            <input type="email" name="email" placeholder="Email">
-          </div>
+  <div class="input-box">
+    <img src="assets/email.svg" alt="">
+    <input type="email" name="email" placeholder="Email" required>
+  </div>
 
-          <div class="input-box">
-            <img src="assets/phone.svg" alt="">
-            <input type="text" name="phone" placeholder="Phone">
-          </div>
+  <div class="input-box">
+    <img src="assets/phone.svg" alt="">
+    <input type="tel" name="phone" placeholder="Phone (contoh: 08123456789)"
+           required
+           pattern="(\+62|62|0)8[0-9]{8,12}"
+           title="Masukkan nomor HP Indonesia yang valid, contoh: 08123456789">
+  </div>
 
-          <div class="input-box textarea-box">
-            <img src="assets/pesan.svg" alt="">
-            <textarea name="comment" placeholder="Message"></textarea>
-          </div>
+  <div class="input-box textarea-box">
+    <img src="assets/pesan.svg" alt="">
+    <textarea name="comment" placeholder="Message"
+              required minlength="10" maxlength="1000"></textarea>
+  </div>
 
-          <button type="submit">
-            <img src="assets/Pesawat.svg" alt="">
-            Submit
-          </button>
+  <button type="submit">
+    <img src="assets/Pesawat.svg" alt="">
+    Submit
+  </button>
 
-        </form>
+</form>
 
       </div>
 
@@ -263,26 +269,38 @@
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbw0lP_WzkrDdeBs9kKPfJHXIrBNshVKgrFlRKU0kp48WZoc6UoUYA4YA1CZ3RuFzXOIKA/exec";
 const form = document.getElementById("contactForm");
+const submitBtn = form.querySelector('button[type="submit"]');
 
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
-  console.log("FORM SUBMIT TERPANGGIL");
+  // buang spasi di awal/akhir, supaya isi spasi doang dianggap kosong
+  ["username", "email", "phone", "comment"].forEach(name => {
+    form.elements[name].value = form.elements[name].value.trim();
+  });
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: new FormData(form)
-  })
-  .then(async (res) => {
-    const text = await res.text();
-    console.log("RESPON:", text);
+  // kalau ada yang belum valid, tampilkan pesan error dan stop
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  submitBtn.disabled = true; // cegah klik berkali-kali
+
+  try {
+    const res = await fetch(scriptURL, {
+      method: "POST",
+      body: new FormData(form)
+    });
+    console.log("RESPON:", await res.text());
     alert("Terkirim 🚀");
     form.reset();
-  })
-  .catch(err => {
+  } catch (err) {
     console.log("ERROR FETCH:", err);
     alert("Gagal 😢 cek console");
-  });
+  } finally {
+    submitBtn.disabled = false;
+  }
 });
 </script>
 
@@ -508,6 +526,28 @@ form.addEventListener("submit", e => {
             </svg>
         </button>
         <!-- Back To Top Button -->
+
+
+    
+    <!-- Back To HIMTIKA Button -->
+    <div class="Btn-parent">
+        <a href="https://himtika.cs.unsika.ac.id/">
+            <button class="Btn">
+                <div class="sign">
+                    <img
+                        src="assets/img/logo/Himtika.png"
+                        width="40"
+                        height="40"
+                        alt="HIMTIKA"
+                    />  
+                </div>            
+                <div class="text-button">
+                    <h1>Back To <span>Home</span></h1>
+                </div>
+            </button>
+        </a>
+    </div>
+    <!-- Back To HIMTIKA Button -->
 
         <!----Start Footer-->
         <footer class="site-footer">
